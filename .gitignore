@@ -2,5 +2,6 @@
 .DS_Store
 *.pyc
 data/
+data2/
 testdata/
 GeoData/

@@ -15,14 +15,14 @@ class Account:
 def loadFromDb(file):
     db=sqlite3.connect('data/'+file)
     dbc=db.cursor()
-    dbc.execute('select vid,time,qq from qzone_url order by vid')
+    dbc.execute('select ip,time,qq from qzone_url order by ip')
     group1={}
-    for vid,time,qq in dbc:
-        if vid in group1:
-            pointusers=group1[vid]
+    for ip,time,qq in dbc:
+        if ip in group1:
+            pointusers=group1[ip]
         else:
             pointusers=set()
-            group1[vid]=pointusers
+            group1[ip]=pointusers
         acc=Account()
         acc.name=qq
         acc.type='qq'

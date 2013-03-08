@@ -3,5 +3,6 @@
 *.pyc
 data/
 data2/
+res/
 testdata/
 GeoData/

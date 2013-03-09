@@ -81,7 +81,7 @@ class MaybeGroup:
                 qqs.append(one.name)
             elif one.type=='weibo':
                 weibos.append(one.name)
-        return {'qq':qqs,'wb':weibos,'c':self.count}
+        return {'qq':qqs.sort(),'wb':weibos.sort(),'c':self.count}
 
 if __name__ == '__main__':
     parser = OptionParser()
@@ -161,7 +161,7 @@ if __name__ == '__main__':
     for mg in maybe_groups:
         if mg.count>min_match:
             js=mg.getJson()
-            key={'qq':{'$all':js['qq']},'wb':{'$all':js['wb']}}
+            key={'qq':js['qq'],'wb':js['wb']}
             value={'$set':{'qq':js['qq'],'wb':js['wb']},'$inc':{'c':js['c']}}
             print json.dumps(key),json.dumps(value)
             con.maybe_group.data.update(key,value,upsert=True)

@@ -100,15 +100,16 @@ if __name__ == '__main__':
     options.starttime=datetime.datetime.fromtimestamp(time.mktime(time.strptime(options.starttime, "%Y%m%d")))
 
     files=os.listdir(options.resdir)
-    basefile=os.path.join(options.resdir,'%s%02d.sqlite'%(options.starttime.strftime("%Y%m%d"),options.starthour))
+    basefile=os.path.join(options.resdir,'%s.sqlite'%((options.starttime+datetime.timedelta(hours=options.starthour)).strftime("%Y%m%d%H")))
 
     cmpfile=[]
     for i in range(1,3):
-        cf=os.path.join(options.resdir,'%s%02d.sqlite'%(options.starttime.strftime("%Y%m%d"),options.starthour+i))
+        time2=options.starttime+datetime.timedelta(hours=options.starthour+i)
+        cf=os.path.join(options.resdir,'%s.sqlite'%(time2.strftime("%Y%m%d%H")))
         cmpfile.append(cf)
-    time2=options.starttime+datetime.timedelta(days=1)
     for i in range(0,3):
-        cf=os.path.join(options.resdir,'%s%02d.sqlite'%(time2.strftime("%Y%m%d"),options.starthour+i))
+        time2=options.starttime+datetime.timedelta(days=1,hours=options.starthour+i)
+        cf=os.path.join(options.resdir,'%s.sqlite'%(time2.strftime("%Y%m%d%H")))
         cmpfile.append(cf)
 
     group1=loadFromDb(basefile)
